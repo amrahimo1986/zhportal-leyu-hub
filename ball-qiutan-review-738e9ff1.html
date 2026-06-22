@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>日常视角下的球探</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f4f9fc;
+      color: #1e2b33;
+      line-height: 1.6;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper {
+      max-width: 800px;
+      margin: 2rem auto;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* hero 短开场 */
+    .hero-note {
+      background: #dceff5;
+      padding: 2.5rem 2rem 2rem;
+      border-radius: 40px 40px 24px 24px;
+      box-shadow: 0 6px 16px rgba(30, 70, 80, 0.06);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-note p:first-child {
+      font-size: 1.5rem;
+      font-weight: 420;
+      letter-spacing: 0.01em;
+      color: #004d5e;
+      line-height: 1.4;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-note .sub {
+      color: #2c5462;
+      font-size: 1rem;
+      max-width: 90%;
+      border-left: 3px solid #4fa3b2;
+      padding-left: 1rem;
+      opacity: 0.85;
+    }
+
+    /* 承接段落 */
+    .bridge {
+      background: white;
+      padding: 2rem 1.8rem;
+      border-radius: 28px;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 3px 12px rgba(0, 80, 90, 0.04);
+    }
+
+    .bridge p {
+      margin-bottom: 1.2rem;
+    }
+
+    .bridge p:last-child {
+      margin-bottom: 0;
+    }
+
+    .inline-link {
+      color: #0b7a8f;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dotted #7bbecb;
+      transition: border 0.2s, color 0.2s;
+    }
+
+    .inline-link:hover {
+      border-bottom: 1px solid #0b7a8f;
+      color: #045163;
+    }
+
+    /* 网格卡片 —— 特点 + 场景 */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card-item {
+      background: white;
+      border-radius: 28px;
+      padding: 1.5rem 1.2rem 1.8rem;
+      box-shadow: 0 4px 14px rgba(40, 90, 100, 0.04);
+      border: 1px solid #e1f0f4;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(20, 100, 110, 0.06);
+    }
+
+    .card-item h3 {
+      font-size: 1.2rem;
+      font-weight: 520;
+      color: #005d6e;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-item h3 span {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .card-item p {
+      font-size: 0.94rem;
+      color: #2c4d58;
+      margin-top: 0.3rem;
+    }
+
+    .card-item .meta-tag {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: 0.75rem;
+      background: #dceff5;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      color: #006173;
+      letter-spacing: 0.02em;
+    }
+
+    /* 温和结尾 */
+    .gentle-outro {
+      background: #ffffffd9;
+      backdrop-filter: blur(2px);
+      padding: 2rem 1.8rem;
+      border-radius: 32px;
+      border: 1px solid #d3e7ed;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 10px rgba(20, 70, 80, 0.03);
+    }
+
+    .gentle-outro p {
+      margin-bottom: 0.8rem;
+    }
+
+    .gentle-outro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-mini {
+      margin-top: 1.5rem;
+      background: #ecf6fa;
+      padding: 1.4rem 1.5rem;
+      border-radius: 24px;
+    }
+
+    .faq-mini details {
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-mini details:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-mini summary {
+      font-weight: 500;
+      color: #00505f;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .faq-mini summary::before {
+      content: "▸";
+      color: #368a9b;
+      font-size: 1.2rem;
+      transition: transform 0.2s;
+    }
+
+    .faq-mini details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .faq-mini .answer {
+      margin-top: 0.5rem;
+      padding-left: 0.5rem;
+      color: #2f5663;
+      font-size: 0.92rem;
+      border-left: 2px solid #7ebccb;
+      padding-left: 1rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #6b8f99;
+      letter-spacing: 0.02em;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.8rem;
+      }
+
+      .hero-note {
+        padding: 2rem 1.2rem 1.5rem;
+        border-radius: 28px;
+      }
+
+      .hero-note p:first-child {
+        font-size: 1.3rem;
+      }
+
+      .bridge {
+        padding: 1.5rem 1.2rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .card-item {
+        padding: 1.2rem 1rem 1.5rem;
+      }
+
+      .gentle-outro {
+        padding: 1.5rem 1.2rem;
+      }
+
+      .faq-mini {
+        padding: 1rem 1rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .hero-note p:first-child {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- hero 短句开场 -->
+  <div class="hero-note">
+    <p>有时只是想查一下球队近况，或对照几项数据。</p>
+    <div class="sub">从一个名字出发，慢慢延伸出更多线索——这是很多人面对信息时的习惯。</div>
+  </div>
+
+  <!-- 承接段落：日常查询、对照、延伸阅读 -->
+  <div class="bridge">
+    <p>
+      打开浏览器，输入一支球队、联赛或球员的名字，然后看赛程、积分、阵容。这个过程重复了很多次，逐渐形成一种安静的节奏。
+      对关注足球的人来说，<a href="https://ball-qiutan.com" class="inline-link">球探</a>像是一个安静的同行者，不制造喧哗，只是把信息整理、陈列，让人按自己的节奏去读。
+    </p>
+    <p>
+      有时候需要对一下几项数据——比如主客场表现差异、某位球员的上场时间变化。也有时候只是想延伸阅读：从一场比赛的统计跳到联赛整体趋势，或者从射手榜看到助攻分布。
+      这种自然的翻阅，不需要太多引导，页面把内容放在那里就够了。
+    </p>
+  </div>
+
+  <!-- 网格卡片：特点 + 场景 -->
+  <div class="cards-grid">
+    <div class="card-item">
+      <h3><span>⚖️</span> 对照</h3>
+      <p>把两队近五场数据并排放，或者对比同一球员在不同赛季的效率。卡片式的布局让人更快地做横向比较。</p>
+      <span class="meta-tag">常用于赛前快速参考</span>
+    </div>
+    <div class="card-item">
+      <h3><span>🧭</span> 延伸</h3>
+      <p>从一场胜负出发，看看相关联的积分区变化、历史交锋记录。信息背后有相连的脉络，点击之间可以自然延伸。</p>
+      <span class="meta-tag">从局部看到整体</span>
+    </div>
+    <div class="card-item">
+      <h3><span>📋</span> 列表与结构</h3>
+      <p>射手、助攻、红黄牌、赛程——信息以表格或清单方式呈现，克制且清晰。不需要过度解读，数据本身已经说明很多。</p>
+      <span class="meta-tag">减少视觉噪音</span>
+    </div>
+    <div class="card-item">
+      <h3><span>🔍</span> 日常入口</h3>
+      <p>不一定抱着明确目的才打开，有时候只是刷新一下看到最新比分或阵容变动。页面本身安静，让信息成为主角。</p>
+      <span class="meta-tag">无压力浏览</span>
+    </div>
+  </div>
+
+  <!-- 温和结尾 + FAQ 摘要 -->
+  <div class="gentle-outro">
+    <p>
+      很多时候，一个网站的价值不在于它推送了什么，而在于当你想查找时，它能提供足够的层次和安静的空间。
+      <a href="https://ball-qiutan.com" class="inline-link">球探</a>给人的感觉就是这样：不需要刻意强调存在感，却总能在需要的时候提供可翻阅的内容。
+    </p>
+    <p>
+      日常查询、对照、延伸——这三个动作并不复杂，但能在一个页面上顺畅地完成它们，是一种克制的便利。
+    </p>
+
+    <div class="faq-mini">
+      <details>
+        <summary>通常可以从哪些维度开始浏览？</summary>
+        <div class="answer">赛事列表、球队阵容、实时比分、历史数据。可以按联赛或杯赛筛选，也可以直接搜索球队名。</div>
+      </details>
+      <details>
+        <summary>页面是否适合移动端阅读？</summary>
+        <div class="answer">是的，卡片和列表在手机屏幕上会自动调整，保持可读性和操作舒适度。</div>
+      </details>
+      <details>
+        <summary>信息更新大致频率？</summary>
+        <div class="answer">比赛日期间数据同步较快，非比赛日会保持基础信息展示。具体可参考页面上的时间戳。</div>
+      </details>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    — 安静翻阅，随性对照 —
+  </div>
+</div>
+</body>
+</html>
